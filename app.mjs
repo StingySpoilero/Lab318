@@ -33,3 +33,13 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
+
+app.use((req, res, next) => {
+    console.log(`Request Method: ${req.method}, Request URL: ${req.url}`);
+    next();
+});
+
+app.get('/download', (req, res) => {
+    const file = path.join(__dirname, 'public/images/example.jpg');
+    res.download(file); // This will trigger the download
+});
